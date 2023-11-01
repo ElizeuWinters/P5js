@@ -73,3 +73,49 @@ function keyPressed() {
     playerX += 10;
   }
 }
+
+COMEÇAAAAAAAAAA
+
+let balls = []; // Array para armazenar as bolinhas
+
+function setup() {
+  createCanvas(800, 400);
+  for (let i = 0; i < 20; i++) {
+    // Bolinhas que se movem da esquerda para a direita
+    balls.push(new Ball(width * 0.25, random(height), 1));
+    // Bolinhas que se movem da direita para a esquerda
+    balls.push(new Ball(width * 0.75, random(height), -1));
+  }
+}
+
+function draw() {
+  background(220);
+  for (let i = 0; i < balls.length; i++) {
+    balls[i].move();
+    balls[i].display();
+  }
+}
+
+class Ball {
+  constructor(x, y, direction) {
+    this.x = x;
+    this.y = y;
+    this.diameter = 20;
+    this.speed = 2;
+    this.direction = direction;
+  }
+
+  move() {
+    this.x += this.speed * this.direction;
+    if (this.x > width || this.x < 0) {
+      this.x = this.x > width ? 0 : width;
+      this.y = random(height);
+    }
+  }
+
+  display() {
+    fill(255, 0, 0);
+    ellipse(this.x, this.y, this.diameter);
+  }
+}
+
